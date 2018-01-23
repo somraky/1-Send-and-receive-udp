@@ -5,5 +5,13 @@ sock = socket.socket(socket.AF_INET, # Internet
                      socket.SOCK_DGRAM) # UDP
 sock.bind((UDP_IP, UDP_PORT))
 while True:
-    data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
-    print "received message:", data
+    recv, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
+    print "received message:", recv
+    data = int(recv)
+    factorial = 1
+    while data>1:
+        factorial *= data
+        data = data-1
+    print "send result:",factorial
+    sock.sendto(str(factorial),addr)
+    
